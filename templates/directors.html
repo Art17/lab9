@@ -1,0 +1,100 @@
+{% extends 'base_nav.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block head %}
+    <script src="{% static 'js/mustache.min.js' %}"></script>
+    <script src="{% static 'js/pagination.min.js' %}"></script>
+    <script id="table_template" type="text/mustache" >
+    {% verbatim %}
+    <table class="table-hover table">
+        <tr>
+            <th>Firsname</th>
+            <th>Lastname</th>
+            <th>Birthdate</th>
+            <th>Year</th>
+            <th>Score</th>
+            <th>Avatar</th>
+            {{#can_delete}}
+            <th>Options</th>
+            {{/can_delete}}
+        </tr>
+        {{#dirs}}
+            <tr class="clickable-row" data-href="/directors/{{ id }}/">
+                <td>{{ name }}</td>
+                <td>{{ surname }}</td>
+                <td>{{ birthdate }}</td>
+                <td>{{ year }}</td>
+                <td>{{ score }}</td>
+                <td><img src="{{ avatar }}" height="64"></td>
+                {{#can_delete}}
+                <td>
+                    <input type="submit" value="DELETE" class="btn-danger" id="id_delete_btn" data-toggle = "modal" data-target = "#myModal">
+                </td>
+                {{/can_delete}}
+            </tr>
+         {{/dirs}}
+        </table>
+    {% endverbatim %}
+    </script>
+    <script src="{% static 'js/search.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+<div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog"
+   aria-labelledby = "myModalLabel" aria-hidden = "true">
+
+   <div class = "modal-dialog">
+      <div class = "modal-content">
+
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+                  &times;
+            </button>
+
+            <h4 class = "modal-title" id = "myModalLabel">
+               Confirmation
+            </h4>
+         </div>
+
+         <div class = "modal-body">
+            Are you sure?
+         </div>
+
+         <div class = "modal-footer">
+             <form method="post" action="{{ dir.id }}/" name="delete_form">
+            <button type = "button" class = "btn btn-default" data-dismiss = "modal">
+               Close
+            </button>
+            <button type = "button" class = "btn btn-danger">
+               Confirm
+            </button>
+             </form>
+         </div>
+
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+
+</div><!-- /.modal -->
+
+    <div class="row">
+    <div class="col-sm-3">
+        <form role="form" method="get">
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary" id="id_search_btn">
+              {% bootstrap_icon "star" %} Search
+            </button>
+        {% endbuttons %}
+        </form>
+    </div>
+    </div>
+    <div id="template_div">
+
+    </div>
+
+    <div class="paginationjs" id="pagination"></div>
+    <script src="{% static 'js/delete_confirm.js' %}"></script>
+    <script src="{% static 'js/click_row.js' %}"></script>
+{% endblock %}

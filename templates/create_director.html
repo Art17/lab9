@@ -1,0 +1,21 @@
+{% extends 'base_nav.html' %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+
+{% block content %}
+    <h3>Add new director</h3>
+    <div class="col-sm-3">
+        <form method="post" role="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+          {% buttons %}
+            <button type="submit" class="btn btn-primary" id="id_create_btn">
+              {% bootstrap_icon "star" %} Submit
+            </button>
+        {% endbuttons %}
+        </form>
+    </div>
+
+    <script src="{% static 'js/form_validation.js' %}"></script>
+{% endblock %}

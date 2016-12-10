@@ -1,0 +1,17 @@
+{% extends 'base_nav.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <div class="container col-sm-3 col-sm-offset-4">
+        <form method="post" role="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <a href="/signup/">Sign up</a>
+          {% buttons %}
+            <button type="submit" class="btn btn-primary">
+              {% bootstrap_icon "star" %} Submit
+            </button>
+        {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}
