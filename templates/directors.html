@@ -27,11 +27,6 @@
                 <td>{{ year }}</td>
                 <td>{{ score }}</td>
                 <td><img src="{{ avatar }}" height="64"></td>
-                {{#can_delete}}
-                <td>
-                    <input type="submit" value="DELETE" class="btn-danger" id="id_delete_btn" data-toggle = "modal" data-target = "#myModal">
-                </td>
-                {{/can_delete}}
             </tr>
          {{/dirs}}
         </table>
@@ -42,42 +37,6 @@
 
 
 {% block content %}
-<div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog"
-   aria-labelledby = "myModalLabel" aria-hidden = "true">
-
-   <div class = "modal-dialog">
-      <div class = "modal-content">
-
-         <div class = "modal-header">
-            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
-                  &times;
-            </button>
-
-            <h4 class = "modal-title" id = "myModalLabel">
-               Confirmation
-            </h4>
-         </div>
-
-         <div class = "modal-body">
-            Are you sure?
-         </div>
-
-         <div class = "modal-footer">
-             <form method="post" action="{{ dir.id }}/" name="delete_form">
-            <button type = "button" class = "btn btn-default" data-dismiss = "modal">
-               Close
-            </button>
-            <button type = "button" class = "btn btn-danger">
-               Confirm
-            </button>
-             </form>
-         </div>
-
-      </div><!-- /.modal-content -->
-   </div><!-- /.modal-dialog -->
-
-</div><!-- /.modal -->
-
     <div class="row">
     <div class="col-sm-3">
         <form role="form" method="get">
